@@ -19,8 +19,14 @@
     @if (TempData["CreatedShortUrl"] is string shortUrl)
     {
         <div class="result generated-result" data-created-url="@shortUrl">
-            <span class="result-label">Generated short URL</span>
-            <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
+            <div class="result-header">
+                <span class="result-label">Generated short URL</span>
+                <span class="result-status">Ready to share</span>
+            </div>
+            <div class="generated-url-row">
+                <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
+                <button type="button" class="btn btn-secondary copy-url-btn" data-copy-url="@shortUrl">Copy URL</button>
+            </div>
             <div class="result-actions">
                 <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@shortUrl">Download QR</button>
             </div>
