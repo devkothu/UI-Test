@@ -8,7 +8,7 @@
     <div class="hero-grid">
         <div>
             <h2>Create a secure short URL</h2>
-            <p>Simple, modern, and responsive URL shortener with QR preview and one-click copy.</p>
+            <p>Simple, modern, and responsive URL shortener with QR preview and QR image download.</p>
         </div>
         <form asp-action="Create" method="post" class="shorten-form">
             <input name="Url" type="url" placeholder="https://example.com/my/very/long/url" required />
@@ -22,7 +22,7 @@
             <span>Your short URL:</span>
             <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
             <div class="result-actions">
-                <button type="button" class="btn btn-secondary copy-btn" data-copy-text="@shortUrl">Copy</button>
+                <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@shortUrl">Download QR</button>
                 <button type="button" class="btn btn-secondary qr-trigger" data-qr-url="@shortUrl">QR</button>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <th>Original URL</th>
                     <th>QR</th>
                     <th>Created</th>
-                    <th>Copy</th>
+                    <th>Download QR</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,7 +58,7 @@
                     </td>
                     <td>@item.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
                     <td>
-                        <button type="button" class="btn btn-secondary copy-btn" data-copy-text="@itemShortUrl">Copy</button>
+                        <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@itemShortUrl">Download</button>
                     </td>
                 </tr>
             }
