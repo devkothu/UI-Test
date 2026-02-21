@@ -149,6 +149,23 @@ input[type="url"] {
 }
 .result-header { display: flex; justify-content: space-between; align-items: center; gap: .8rem; flex-wrap: wrap; }
 .result-label { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.result-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  flex-wrap: wrap;
+}
+
+.result-toggle-btn {
+  padding: .3rem .6rem;
+  border-radius: 999px;
+  font-size: .74rem;
+  line-height: 1.2;
+}
+
+.generated-result-content[hidden] {
+  display: none;
+}
 .result-status {
   font-size: .78rem;
   font-weight: 600;
