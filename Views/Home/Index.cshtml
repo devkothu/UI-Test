@@ -62,7 +62,7 @@
         <p class="section-sub">Responsive table layout for desktop and mobile.</p>
     </div>
     <div class="table-wrap">
-        <table>
+        <table id="recentUrlsTable" data-page-size="5">
             <thead>
                 <tr>
                     <th>Code</th>
@@ -88,5 +88,11 @@
             }
             </tbody>
         </table>
+    </div>
+
+    <div class="table-pagination" id="recentUrlsPagination" aria-label="Recent URLs pagination" hidden>
+        <button type="button" class="btn btn-secondary" data-pagination-action="prev">Previous</button>
+        <span class="pagination-status" data-pagination-status>Page 1 of 1</span>
+        <button type="button" class="btn btn-secondary" data-pagination-action="next">Next</button>
     </div>
 </section>
