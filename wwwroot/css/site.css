@@ -175,6 +175,27 @@ input[type="url"] {
 
 .table-wrap { width: 100%; }
 
+.table-pagination {
+  margin-top: .85rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .6rem;
+}
+
+.pagination-status {
+  color: var(--muted);
+  font-size: .88rem;
+  min-width: 96px;
+  text-align: center;
+}
+
+.table-pagination .btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  filter: none;
+}
+
 table { width: 100%; border-collapse: collapse; }
 th, td {
   text-align: left;
@@ -252,6 +273,10 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 10%, transparent);
     letter-spacing: .08em;
     color: var(--muted);
     font-weight: 700;
+  }
+
+  .table-pagination {
+    justify-content: space-between;
   }
 
   .url,

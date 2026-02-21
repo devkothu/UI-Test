@@ -39,6 +39,61 @@
     });
   });
 
+
+  const recentUrlsTable = document.getElementById("recentUrlsTable");
+  if (recentUrlsTable) {
+    const tableBody = recentUrlsTable.querySelector("tbody");
+    const rows = tableBody ? Array.from(tableBody.querySelectorAll("tr")) : [];
+    const pageSize = Number.parseInt(recentUrlsTable.dataset.pageSize ?? "5", 10);
+    const pagination = document.getElementById("recentUrlsPagination");
+
+    if (pagination && rows.length > pageSize && pageSize > 0) {
+      const status = pagination.querySelector("[data-pagination-status]");
+      const prevButton = pagination.querySelector("[data-pagination-action='prev']");
+      const nextButton = pagination.querySelector("[data-pagination-action='next']");
+      const totalPages = Math.ceil(rows.length / pageSize);
+      let currentPage = 1;
+
+      const renderPage = () => {
+        const start = (currentPage - 1) * pageSize;
+        const end = start + pageSize;
+
+        rows.forEach((row, index) => {
+          row.hidden = index < start || index >= end;
+        });
+
+        if (status) {
+          status.textContent = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        if (prevButton) {
+          prevButton.disabled = currentPage === 1;
+        }
+
+        if (nextButton) {
+          nextButton.disabled = currentPage === totalPages;
+        }
+      };
+
+      prevButton?.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          renderPage();
+        }
+      });
+
+      nextButton?.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+          currentPage += 1;
+          renderPage();
+        }
+      });
+
+      pagination.hidden = false;
+      renderPage();
+    }
+  }
+
   document.querySelectorAll(".download-qr-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const url = button.dataset.qrUrl;
