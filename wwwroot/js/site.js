@@ -16,6 +16,29 @@
     });
   }
 
+
+  document.querySelectorAll(".copy-url-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const url = button.dataset.copyUrl;
+      if (!url) {
+        return;
+      }
+
+      const initialText = button.textContent;
+
+      try {
+        await navigator.clipboard.writeText(url);
+        button.textContent = "Copied";
+      } catch {
+        button.textContent = "Copy failed";
+      }
+
+      setTimeout(() => {
+        button.textContent = initialText;
+      }, 1100);
+    });
+  });
+
   document.querySelectorAll(".download-qr-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const url = button.dataset.qrUrl;
