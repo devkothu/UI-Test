@@ -35,6 +35,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 1rem;
+  box-shadow: 0 12px 32px color-mix(in srgb, #000 18%, transparent);
 }
 .hero-grid {
   display: grid;
@@ -61,7 +62,19 @@ input[type="url"] {
   color: #fff;
   cursor: pointer;
   font-weight: 600;
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
 }
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
 .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
 .text-btn {
   border: 0;
@@ -99,6 +112,8 @@ input[type="url"] {
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; min-width: 700px; }
 th, td { text-align: left; padding: .6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: color-mix(in srgb, var(--surface-2) 65%, transparent); }
+tbody tr:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .url { max-width: 290px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .short-url { max-width: 220px; }
 
