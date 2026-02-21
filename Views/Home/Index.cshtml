@@ -41,17 +41,22 @@
     {
         <div class="result generated-result" data-created-url="@shortUrl">
             <div class="result-header">
-                <span class="result-label">Generated short URL</span>
+                <div class="result-title-wrap">
+                    <span class="result-label">Generated short URL</span>
+                    <button type="button" class="btn btn-secondary result-toggle-btn" data-generated-toggle aria-expanded="true">Unexpand</button>
+                </div>
                 <span class="result-status">Ready to share</span>
             </div>
-            <div class="generated-url-row">
-                <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
-                <button type="button" class="btn btn-secondary copy-url-btn" data-copy-url="@shortUrl">Copy URL</button>
+            <div class="generated-result-content" data-generated-content>
+                <div class="generated-url-row">
+                    <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
+                    <button type="button" class="btn btn-secondary copy-url-btn" data-copy-url="@shortUrl">Copy URL</button>
+                </div>
+                <div class="result-actions">
+                    <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@shortUrl">Download QR</button>
+                </div>
+                <img class="qr-thumb qr-thumb-large" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=@Uri.EscapeDataString(shortUrl)" alt="QR code for @shortUrl" />
             </div>
-            <div class="result-actions">
-                <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@shortUrl">Download QR</button>
-            </div>
-            <img class="qr-thumb qr-thumb-large" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=@Uri.EscapeDataString(shortUrl)" alt="QR code for @shortUrl" />
         </div>
     }
 </section>

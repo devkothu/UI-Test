@@ -17,6 +17,24 @@
   }
 
 
+
+  const generatedResult = document.querySelector(".generated-result");
+  if (generatedResult) {
+    const toggleButton = generatedResult.querySelector("[data-generated-toggle]");
+    const content = generatedResult.querySelector("[data-generated-content]");
+
+    if (toggleButton && content) {
+      toggleButton.addEventListener("click", () => {
+        const isExpanded = toggleButton.getAttribute("aria-expanded") === "true";
+        const nextExpanded = !isExpanded;
+
+        content.hidden = !nextExpanded;
+        toggleButton.setAttribute("aria-expanded", String(nextExpanded));
+        toggleButton.textContent = nextExpanded ? "Unexpand" : "Expand";
+      });
+    }
+  }
+
   document.querySelectorAll(".copy-url-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const url = button.dataset.copyUrl;
