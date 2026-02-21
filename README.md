@@ -6,6 +6,14 @@ Simple and modern URL shortener with:
 - Secure defaults and encrypted critical configuration support.
 - Flexible architecture for future growth.
 
+## Database (SQL Server)
+
+The app now persists short URLs in SQL Server using Entity Framework Core.
+
+- Configure the connection string at `ConnectionStrings:ShortUrlDb`.
+- The app ensures the table exists at startup (`Database.EnsureCreated`).
+- A ready-to-run SQL schema script is available at `database/schema.sql`.
+
 ## API planning
 
 ### Auth
