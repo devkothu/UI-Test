@@ -1,47 +1,75 @@
 @model IReadOnlyCollection<ShortUrlEntry>
 @{
     ViewData["Title"] = "URL Shortener";
+    var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
 }
 
 <section class="card hero">
-    <h2>Create a secure short URL</h2>
-    <p>Simple, modern, and flexible experience with dark/light theme and token-ready API.</p>
-
-    <form asp-action="Create" method="post" class="shorten-form">
-        <input name="Url" type="url" placeholder="https://example.com/my/very/long/url" required />
-        <button type="submit" class="btn">Shorten</button>
-    </form>
+    <div class="hero-grid">
+        <div>
+            <h2>Create a secure short URL</h2>
+            <p>Simple, modern, and responsive URL shortener with QR preview and one-click copy.</p>
+        </div>
+        <form asp-action="Create" method="post" class="shorten-form">
+            <input name="Url" type="url" placeholder="https://example.com/my/very/long/url" required />
+            <button type="submit" class="btn">Shorten</button>
+        </form>
+    </div>
 
     @if (TempData["CreatedShortUrl"] is string shortUrl)
     {
-        <div class="result">
+        <div class="result" data-created-url="@shortUrl">
             <span>Your short URL:</span>
             <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
+            <div class="result-actions">
+                <button type="button" class="btn btn-secondary copy-btn" data-copy-text="@shortUrl">Copy</button>
+                <button type="button" class="btn btn-secondary qr-trigger" data-qr-url="@shortUrl">QR</button>
+            </div>
         </div>
     }
 </section>
 
 <section class="card">
-    <h3>Recent URLs</h3>
+    <div class="section-header">
+        <h3>Recent URLs</h3>
+    </div>
     <div class="table-wrap">
         <table>
             <thead>
                 <tr>
                     <th>Code</th>
+                    <th>Short URL</th>
                     <th>Original URL</th>
+                    <th>QR</th>
                     <th>Created</th>
+                    <th>Copy</th>
                 </tr>
             </thead>
             <tbody>
             @foreach (var item in Model)
             {
+                var itemShortUrl = $"{baseUrl}/s/{item.Code}";
                 <tr>
                     <td><code>@item.Code</code></td>
+                    <td class="url short-url"><a href="@itemShortUrl" target="_blank" rel="noreferrer">@itemShortUrl</a></td>
                     <td class="url"><a href="@item.OriginalUrl" target="_blank" rel="noreferrer">@item.OriginalUrl</a></td>
+                    <td>
+                        <button type="button" class="text-btn qr-trigger" data-qr-url="@itemShortUrl">QR text</button>
+                    </td>
                     <td>@item.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary copy-btn" data-copy-text="@itemShortUrl">Copy</button>
+                    </td>
                 </tr>
             }
             </tbody>
         </table>
     </div>
 </section>
+
+<div id="qrPopup" class="qr-popup" aria-hidden="true">
+    <div class="qr-popup-inner">
+        <img id="qrPopupImage" alt="QR code preview" />
+        <p id="qrPopupText"></p>
+    </div>
+</div>
