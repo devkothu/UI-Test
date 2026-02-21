@@ -8,7 +8,7 @@
     <div class="hero-grid">
         <div>
             <h2>Create a secure short URL</h2>
-            <p>Simple, modern, and responsive URL shortener with QR preview and QR image download.</p>
+            <p>Simple, modern, and responsive URL shortener with QR image download support.</p>
         </div>
         <form asp-action="Create" method="post" class="shorten-form">
             <input name="Url" type="url" placeholder="https://example.com/my/very/long/url" required />
@@ -18,8 +18,8 @@
 
     @if (TempData["CreatedShortUrl"] is string shortUrl)
     {
-        <div class="result" data-created-url="@shortUrl">
-            <span>Your short URL:</span>
+        <div class="result generated-result" data-created-url="@shortUrl">
+            <span class="result-label">Generated short URL</span>
             <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
             <div class="result-actions">
                 <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@shortUrl">Download QR</button>
@@ -40,7 +40,6 @@
                     <th>Code</th>
                     <th>Short URL</th>
                     <th>Original URL</th>
-                    <th>QR</th>
                     <th>Created</th>
                     <th>Download QR</th>
                 </tr>
@@ -53,9 +52,6 @@
                     <td><code>@item.Code</code></td>
                     <td class="url short-url"><a href="@itemShortUrl" target="_blank" rel="noreferrer">@itemShortUrl</a></td>
                     <td class="url"><a href="@item.OriginalUrl" target="_blank" rel="noreferrer">@item.OriginalUrl</a></td>
-                    <td>
-                        <img class="qr-thumb" src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=@Uri.EscapeDataString(item.OriginalUrl)" alt="QR code for @item.OriginalUrl" />
-                    </td>
                     <td>@item.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
                     <td>
                         <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@item.OriginalUrl">Download</button>
