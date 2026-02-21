@@ -8,16 +8,21 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <header class="topbar">
-        <div class="container topbar-content">
-            <h1 class="brand">ShortURL</h1>
-            <button id="themeToggle" class="btn btn-secondary" type="button">Toggle Theme</button>
-        </div>
-    </header>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="container topbar-content">
+                <div class="brand-wrap">
+                    <p class="brand-kicker">Workspace</p>
+                    <h1 class="brand">ShortURL Control Panel</h1>
+                </div>
+                <button id="themeToggle" class="btn btn-secondary" type="button">Toggle Theme</button>
+            </div>
+        </header>
 
-    <main class="container content">
-        @RenderBody()
-    </main>
+        <main class="container content">
+            @RenderBody()
+        </main>
+    </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
