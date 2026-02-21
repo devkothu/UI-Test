@@ -23,8 +23,8 @@
             <a href="@shortUrl" target="_blank" rel="noreferrer">@shortUrl</a>
             <div class="result-actions">
                 <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@shortUrl">Download QR</button>
-                <button type="button" class="btn btn-secondary qr-trigger" data-qr-url="@shortUrl">QR</button>
             </div>
+            <img class="qr-thumb qr-thumb-large" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=@Uri.EscapeDataString(shortUrl)" alt="QR code for @shortUrl" />
         </div>
     }
 </section>
@@ -54,11 +54,11 @@
                     <td class="url short-url"><a href="@itemShortUrl" target="_blank" rel="noreferrer">@itemShortUrl</a></td>
                     <td class="url"><a href="@item.OriginalUrl" target="_blank" rel="noreferrer">@item.OriginalUrl</a></td>
                     <td>
-                        <button type="button" class="text-btn qr-trigger" data-qr-url="@itemShortUrl">QR text</button>
+                        <img class="qr-thumb" src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=@Uri.EscapeDataString(item.OriginalUrl)" alt="QR code for @item.OriginalUrl" />
                     </td>
                     <td>@item.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
                     <td>
-                        <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@itemShortUrl">Download</button>
+                        <button type="button" class="btn btn-secondary download-qr-btn" data-qr-url="@item.OriginalUrl">Download</button>
                     </td>
                 </tr>
             }
@@ -66,10 +66,3 @@
         </table>
     </div>
 </section>
-
-<div id="qrPopup" class="qr-popup" aria-hidden="true">
-    <div class="qr-popup-inner">
-        <img id="qrPopupImage" alt="QR code preview" />
-        <p id="qrPopupText"></p>
-    </div>
-</div>
